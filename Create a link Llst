@@ -1,0 +1,64 @@
+//Bismillah hir Rahmanir Rahim
+//Creating a link list
+#include<bits/stdc++.h>
+using namespace std;
+
+
+struct node
+{
+    int info;
+    struct node *next;
+};
+typedef struct node *Node;
+
+
+Node get_node(void)
+{
+
+    Node p = (Node)malloc(sizeof(struct node));
+    p->next = NULL;
+    return p;
+}
+int main()
+{
+
+    int data;
+    Node start = NULL, ptr = NULL;
+    cout<<"Enter negative number to terminate the list"<<endl;
+    cin>>data;
+    if(data>=0)
+    {
+        start = get_node();
+        ptr = start;
+        ptr->info = data;
+    }
+    while(data>=0)
+    {
+        cin>>data;
+        if(data>=0)
+        {
+            ptr->next = get_node();
+            ptr = ptr->next;
+            ptr->info = data;
+        }
+    }
+
+    ptr = start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+    return 0;
+
+}
+
+
+
+/* 
+
+input: 1 2 3 4 5 6 7 8 9 10 11 12 5 2 4 8 1 -11
+output: 1 2 3 4 5 6 7 8 9 10 11 12 5 2 4 8 1
+
+
