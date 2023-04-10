@@ -1,0 +1,480 @@
+//Bismillah hir Rahmanir Rahim
+//Creating a link list
+/* This operation perform all the operation of a link list.
+You can do multiple link list work by this code.
+it works
+1. inserting
+    (a) inserting a noce at the first position.
+    (b)inserting a node at the last position.
+    (c)inserting a node at a specific location.
+    (d)inserting a node in a sorted array.
+
+2. deleting
+    (a) deleting of the first node
+    (b) deleting of the second node.
+    (c) deleting of the specific node
+3. Searching
+4. Sorting.
+
+Mind it it's a link list so that you can't handle it as easy as an array.
+
+Okay! Let's start.
+
+
+*/
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+struct node
+{
+    int info;
+    struct node *next;
+};
+typedef struct node *Node;
+
+
+Node get_node(void)
+{
+
+    Node p = (Node)malloc(sizeof(struct node));
+    p->next = NULL;
+    return p;
+}
+
+int main()
+{
+    cout<<"Assalamu Alaikum\n";
+    int data;
+    Node start = NULL, ptr = NULL;
+    cout<<"\nEnter negative number to terminate the list\n";
+    cin>>data;
+    if(data>=0)
+    {
+        start = get_node();
+        ptr = start;
+        ptr->info = data;
+    }
+    while(data>=0)
+    {
+        cin>>data;
+        if(data>=0)
+        {
+            ptr->next = get_node();
+            ptr = ptr->next;
+            ptr->info = data;
+        }
+    }
+
+    ptr = start;
+    cout<<"\nThe list is :";
+
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+
+    //inserting
+    //inserting a node as a first mode of the link list
+    Node new_node = NULL;
+
+    cout<<"\nInserting "<<endl;
+    cout<<"\nPlease enter a value to insert at the first position of the list\n";
+    cin>>data;
+    new_node = get_node();
+    new_node->next = start;
+    new_node->info = data;
+    start = new_node;
+    ptr = start;
+
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+    cout<<"\nPlease enter a value to insert at the last position of the list :\n";
+    cin>>data;
+    ptr = start;
+    Node new_node2 = get_node();
+    new_node2->info = data;
+    while(1)
+    {
+        if(ptr->next==NULL)
+        {
+            ptr->next= new_node2;
+
+            break;
+        }
+        ptr = ptr->next ;
+    }
+
+
+    ptr = start;
+
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+
+
+    //Inserting a node at any point
+
+    Node new_node3 = get_node();
+    cout<<"\nEnter the position where you want to insert the element\n";
+    int position;
+    cin>>position;
+    cout<<"\nPlease Enter an element\n";
+    cin>>data;
+    new_node3->info = data;
+
+
+    ptr = start;
+    int c = 2;
+    while(ptr!=NULL)
+    {
+        if(position==c)
+        {
+            new_node3->next = ptr->next;
+            ptr->next = new_node3;
+            break;
+        }
+        ptr = ptr->next;
+        c++;
+    }
+    ptr = start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+    //Inserting an element in a sorted link_list
+
+    cout<<"\nEnter an element to insert in the list\n";
+
+    cin>>data;
+    ptr = start;
+    Node new_node4 = get_node();
+    new_node4->info = data;
+    if(start->info>data)
+    {
+        new_node4->next = start;
+        start = new_node4;
+    }
+
+    else
+    {
+
+        int f = 0;
+        while(ptr!=NULL)
+        {
+            if((ptr->next->info)>data)
+            {
+                new_node4 ->next = ptr->next;
+                ptr->next = new_node4;
+                f= 1;
+                break;
+            }
+            ptr = ptr->next;
+        }
+
+        if(f==0)
+        {
+            ptr = start;
+            while(1)
+            {
+                if(ptr->next==NULL)
+                {
+                    ptr->next= new_node4;
+
+                    break;
+                }
+                ptr = ptr->next ;
+            }
+        }
+    }
+    ptr = start;
+
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+
+        ptr = ptr->next;
+    }
+
+
+
+    // Deleting
+    //Deleting elements from the first node;
+
+    cout<<"\nEnter f to delete the first element\n";
+    string s;
+    cin>>s;
+
+    if(s=="f")
+    {
+        start = start->next;
+        cout<<"\nAfter deleting the first element \n";;
+    }
+    else
+    {
+        cout<<"\nThe remaining list: \n";
+    }
+    ptr = start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+    cout<<"\nEnter l to delete the first element\n";
+
+    cin>>s;
+
+    ptr = start;
+    int cnt = 0;
+
+    if(s=="l")
+    {
+        while(ptr!=NULL)
+        {
+            if(ptr->next->next==NULL)
+            {
+                ptr->next = NULL;
+                break;
+            }
+            ptr = ptr->next;
+        }
+        cout<<"\nAfter deleting the last element \n";
+    }
+    else
+    {
+        cout<< "\nThe remaining list :\n";
+    }
+
+    //deleting the last element
+
+    ptr = start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+        c++;
+    }
+
+
+    //deleting at the fixed point
+
+    cout<<"\nEnter the position to delete element\n";
+    cin>>position;
+    ptr = start;
+    c = 0;
+    if(position==1){
+        start = start->next;
+    }
+    else{
+    while(ptr!=NULL)
+    {
+        if(position==c+2)
+        {
+            ptr->next = ptr->next->next;
+            break;
+        }
+        c++;
+        ptr = ptr->next;
+    }
+    }
+    ptr =  start;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->info<<" ";
+        ptr = ptr->next;
+    }
+
+
+//delete a specific number from a list
+
+    cout<<"\nEnter a number to remove from the list\n";
+    int num;
+    cin>>num;
+    ptr = start;
+    while(ptr!=NULL)
+    {
+        if(start->info==num)
+        {
+            start = start->next;
+        }
+        else
+        {
+            while(ptr!=NULL)
+            {
+                if(ptr->next->info==num)
+                {
+                    ptr->next = ptr->next->next;
+                    break;
+                }
+                ptr = ptr->next;
+            }
+        }
+        int count1 = 0;
+        ptr = start;
+        while(ptr!=NULL)
+        {
+            cout<<ptr->info<<" ";
+            ptr = ptr->next;
+            count1++;
+        }
+
+
+//Searching
+
+        cout<<"\nEnter the element that you want to search from the list\n";
+        cin>>num;
+        ptr = start;
+        if(start->info==num)
+        {
+            cout<<"\nthis number exists in the position 1\n";
+        }
+        else
+        {
+            c = 0;
+            int  flag = 0;
+            while(ptr!=NULL)
+            {
+                c++;
+                if(ptr->info==num)
+                {
+                    cout<<"\nthis number exists in the position \n"<<c;
+                    flag = 1;
+                    break;
+                }
+                ptr = ptr->next;
+            }
+            if(flag==0)cout<<"\nthis number does not exist in the list\n";
+
+        }
+
+        // cout<<"total"<<count1<<endl;
+
+        //sorting
+        cout<<"\nEnter y if you want to sort the list: \n";
+        cin>>s;
+        if(s=="y"){
+        Node i,j;
+        for(i=start; i!=NULL; i=i->next)
+        {
+            for( j=i; j!=NULL; j=j->next)
+            {
+                if(i->info>j->info)
+                {
+                    swap(i->info,j->info);
+
+                }
+            }
+        }
+        cout<<"\nSorted List :\n";
+        }
+        ptr = start;
+        while(ptr!=NULL)
+        {
+            cout<<ptr->info<<" ";
+            ptr = ptr->next;
+        }
+        cout<<"\n";
+        return 0;
+
+    }
+}
+
+
+
+
+/*
+
+input sample:
+
+
+
+10 20 30 40 50 60 70 80 90 -1
+1
+100
+2
+5
+55
+f
+l
+1
+20
+80
+y
+
+
+output sample:
+
+
+Assalamu Alaikum
+
+Enter negative number to terminate the list
+10 20 30 40 50 60 70 80 90 -1
+
+The list is :10 20 30 40 50 60 70 80 90
+Inserting
+
+Please enter a value to insert at the first position of the list
+1
+1 10 20 30 40 50 60 70 80 90
+Please enter a value to insert at the last position of the list :
+100
+1 10 20 30 40 50 60 70 80 90 100
+Enter the position where you want to insert the element
+2
+
+Please Enter an element
+5
+1 5 10 20 30 40 50 60 70 80 90 100
+Enter an element to insert in the list
+55
+1 5 10 20 30 40 50 55 60 70 80 90 100
+Enter f to delete the first element
+f
+
+After deleting the first element
+5 10 20 30 40 50 55 60 70 80 90 100
+Enter l to delete the first element
+l
+
+After deleting the last element
+5 10 20 30 40 50 55 60 70 80 90
+Enter the position to delete element
+1
+10 20 30 40 50 55 60 70 80 90
+Enter a number to remove from the list
+20
+10 30 40 50 55 60 70 80 90
+Enter the element that you want to search from the list
+80
+
+this number exists in the position
+8
+Enter y if you want to sort the list:
+y
+
+Sorted List :
+10 30 40 50 55 60 70 80 90
+
+
+
+//////Thank you //////
+
+*/
+
+
